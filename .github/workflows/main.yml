@@ -14,11 +14,11 @@ jobs:
       - name: "Login to Dockerhub"
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD}}
       - name: "Build Docker image"
-        run: docker build -t naveen9700/nodejs-app .
+        run: docker build -t nodejs-app:1 .
       - name: "Tag the image"
-        run:  docker tag nodejs-app naveen9700/nodejs-app:latest
+        run:  docker tag nodejs-app:1 naveen9700/nodejs-app:1
       - name: "Publish image to Dockerhub"
-        run: docker push naveen9700/nodejs-app:lastet 
+        run: docker push naveen9700/nodejs-app:1 
   deploy:
     needs: build
     runs-on: [self-hosted] 
