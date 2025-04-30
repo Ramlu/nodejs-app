@@ -73,7 +73,7 @@ app.get("/rest/getAllUsers", (req, res) => {
     res.send(userData)
    });
 
-app.get("demo", (req,res) => {
+app.get("/", (req,res) => {
     res.send("Hello, This is the Devops World")
 });
 
