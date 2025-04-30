@@ -1,24 +1,22 @@
 name: Node.js CI/CD
-
 on:
   push:
-    branches: [ "main","master" ]
-
+    branches: [ "main" ]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
     strategy:
       matrix:
         node-version: [16.x]
     steps:
       - name: "checkout Source ${{ matrix.node-version }}"
         uses: actions/checkout@v4
-      - name: "Set Node Js"
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: "Install Dependencies"
-        run: npm install
-      - name: "Test Project"
-        run: npm test
+      - name: "Login to Dockerhub"
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD}}
+      - name: "Build Docker image"
+        run: docker build -t naveen9700/nodejs-app .
+      - name: "Tag the image"
+        run:  docker tag nodejs-app naveen9700/nodejs-app:latest
+      - name: "Publish image to Dockerhub"
+        run: docker push naveen9700/nodejs-app:lastet 
+  
