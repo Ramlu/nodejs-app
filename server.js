@@ -73,6 +73,10 @@ app.get("/rest/getAllUsers", (req, res) => {
     res.send(userData)
    });
 
+app.get("demo", (req,res) => {
+    res.send("Hello, This is the Devops World")
+});
+
 app.listen(PORT, () => {
   console.log("Server running");
 });
